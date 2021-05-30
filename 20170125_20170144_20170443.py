@@ -4,6 +4,9 @@ from sklearn.model_selection import train_test_split
 import joblib
 import os
 
+pos_revs_path = 'D:\\python-projects\\NLP-ASSIGNMENT2\\txt_sentoken\\pos'  # change this to your local path
+neg_revs_path = 'D:\\python-projects\\NLP-ASSIGNMENT2\\txt_sentoken\\neg'  # change this to your local path
+
 
 def load_data(folder_path):
     files = os.listdir(folder_path)
@@ -15,8 +18,8 @@ def load_data(folder_path):
 
 
 def generate_tf_idf():
-    pos_revs = load_data('D:\\python-projects\\NLP-ASSIGNMENT2\\txt_sentoken\\pos')
-    neg_revs = load_data('D:\\python-projects\\NLP-ASSIGNMENT2\\txt_sentoken\\neg')
+    pos_revs = load_data(pos_revs_path)
+    neg_revs = load_data(neg_revs_path)
     revs = pos_revs + neg_revs
     vectorizer = TfidfVectorizer(stop_words='english')
     vectors = vectorizer.fit_transform(revs).toarray()
@@ -49,8 +52,8 @@ def ui():
         path = input('Enter file path: ')
         with open(path) as file:
             review = file.read()
-    pos_revs = load_data('D:\\python-projects\\NLP-ASSIGNMENT2\\txt_sentoken\\pos')
-    neg_revs = load_data('D:\\python-projects\\NLP-ASSIGNMENT2\\txt_sentoken\\neg')
+    pos_revs = load_data(pos_revs_path)
+    neg_revs = load_data(neg_revs_path)
     revs = pos_revs + neg_revs
     vectorizer = TfidfVectorizer(stop_words='english')
     vectorizer.fit_transform(revs).toarray()
@@ -62,5 +65,5 @@ def ui():
         print('Negative')
 
 
-# create_model()
+# create_model() # uncomment this to create the model first then run the ui function
 ui()
